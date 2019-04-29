@@ -1,4 +1,17 @@
 <p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_issue_path(@issue) %> |
-<%= link_to 'Back', issues_path %>
+<p>
+  <b>Status:</b>
+  <%= @issue.status %>
+</p>
+<p>
+  <b>Severity:</b>
+  <%= @issue.severity %>
+</p>
+<p>
+  <b>Comment:</b>
+  <%= @issue.comment %>
+</p>
+<% if current_customer.id == @issue.customer.id %>
+  <%= link_to 'Edit', edit_product_issue_path(@issue.product, @issue) %>
+<%end%>
+<%= link_to 'Back', product_issues_path(@issue.product) %>

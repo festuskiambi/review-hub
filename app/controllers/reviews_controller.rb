@@ -47,7 +47,6 @@ class ReviewsController < ApplicationController
   # PATCH/PUT /reviews/1.json
   def update
     @review = @product.reviews.find(params[:id])
-
     respond_to do |format|
       update_params = review_params.merge({ customer_id: current_customer.id })
       if @review.update_attributes(update_params)
