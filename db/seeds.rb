@@ -1,19 +1,27 @@
-# frozen_string_literal: true
+ActiveRecord::Base.transaction do
 
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#  movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#  Character.create(name: 'Luke', movie: movies.first)
-Customer.destroy_all
-Product.destroy_all
-customer = Customer.create!(first_name: 'firstname', user_name: 'username',
-                            email: 'example@email.com', password: '123456',
-                            password_confirmation: '123456')
-product = Product.create!(name: 'product1', code: 'QWER', category: 'Apparel')
-review = Review.create!(rating: 3, comment: 'not good nood  f  dd  d d s  s  ',
-                        customer: customer, product: product)
-issue = Issue.create!(comment: 'not responding to this event now!',
-                      severity: 'MINOR', product: product, customer: customer)
+  # First, empty the DB
+  Review.destroy_all
+  Issue.destroy_all
+  Product.destroy_all
+  Customer.destroy_all
+
+  # Customers
+  fred = Customer.create(first_name: 'fred', last_name: 'heath', user_name: 'freddo', email: 'fred@gmail.com', password: 'babushka')
+  ben = Customer.create(first_name: 'ben', last_name: 'smith', user_name: 'batman', email: 'ben@gmail.com', password: '123456')
+  jerry = Customer.create(first_name: 'jerry', last_name: 'jones', user_name: 'bsm776', email: 'jerry@gmail.com', password: 'babushka')
+
+  # Products
+  wolfen = Product.create(name: 'Wolfenstein', code: 'WLFN', category: 'SHOOTER')
+  zombies = Product.create(name: 'Age Of Zombies', code: 'AOZM', category: 'RPG')
+  larry = Product.create(name: 'Laounge Larry 2106', code: 'LL16', category: 'ARCADE')
+
+  # reviews
+  Review.create(customer: fred, product: zombies, rating: 4, comment: 'that was a scary experience')
+  Review.create(customer: fred, product: larry, rating: 5, comment: 'back in the 80s dude!')
+  Review.create(customer: jerry, product: larry, rating: 3, comment: 'Not as sleek as I remember')
+
+  # Issues
+  Issue.create(customer: ben, product: larry, severity: 'COSMETIC', comment: 'pixelation at the top corner of the screen')
+  Issue.create(customer: jerry, product: larry, severity: 'MINOR', comment: 'Jerry cannot open door at level 2')
+end
