@@ -9,4 +9,7 @@ RSpec.describe Product, type: :model do
   it do
     should have_many(:complaining_customers).through(:issues).source(:customer)
   end
+
+  it '#average_ratings' do
+  end
 end

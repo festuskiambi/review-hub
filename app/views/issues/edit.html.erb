@@ -1,0 +1,4 @@
+<h1>Editing Issue</h1>
+<%= render 'form', issue: @issue %>
+<%= link_to 'Show',product_issue_path(@issue.product, @issue) %>
+<%= link_to 'Back', product_issues_path(@issue.product) %>
